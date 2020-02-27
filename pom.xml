@@ -7,7 +7,7 @@
     <groupId>de.phip1611.docx4j-search-and-replace-util</groupId>
     <artifactId>docx4j-search-and-replace-util</artifactId>
     <version>1.0.0</version>
-    <description>This library helps you to search and replace text inside docx-Documents that have been parsed by Docx4J.</description>
+    <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
