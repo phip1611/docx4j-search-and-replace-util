@@ -1,6 +1,6 @@
 # Docx4JSRUtil - Search and replace util for Docx4J
 
-Docx4JS*earchAnd*R*replace*Util library helps you to search and replace text inside docx-Documents parsed by Docx4J.
+Docx4JS*earchAnd*R*replace*Util library helps you to search and replace text inside docx-Documents parsed by [Docx4J](https://github.com/plutext/docx4j).
 
 When you write a placeholder inside a .docx-Document, e.g. `${NAME}` there is no guarantee
 this string lands "as is" inside the underlying XML. There can be style markup in between.
