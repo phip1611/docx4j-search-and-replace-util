@@ -2,12 +2,15 @@ package de.phip1611;
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.Text;
 import org.junit.Assert;
 import org.junit.Test;
@@ -105,6 +108,31 @@ public class Docx4JSRUtilTest {
                 .get();
 
         Assert.assertEquals("Hallo FOO BarBARBAR", newCompleteString);
+    }
+
+    @Test
+    public void testWithDocx() {
+        Map<String, String> placeholderMap = new HashMap<>();
+        placeholderMap.put("${NAME}", "Philipp");
+        placeholderMap.put("${SURNAME}", "Schuster");
+        placeholderMap.put("${PLACE_OF_BIRTH}", "GERMANY");
+
+        try {
+            WordprocessingMLPackage sourceDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/source.docx"));
+            WordprocessingMLPackage expectedDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/expected_after.docx"));
+
+            Docx4JSRUtil.searchAndReplace(sourceDocxDoc, placeholderMap);
+
+            List<Text> afterList = Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(), Text.class);
+            List<Text> expectedList = Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(), Text.class);
+
+            String after = Docx4JSRUtil.getCompleteString(afterList);
+            String expected = Docx4JSRUtil.getCompleteString(expectedList);
+
+            Assert.assertEquals(expected, after);
+        } catch (Docx4JException e) {
+            Assert.fail("Exception occured!");
+        }
     }
 
     private List<Text> asTexts(String... texts) {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.bind.JAXBElement;
 
@@ -85,7 +86,11 @@ public class Docx4JSRUtil {
      * @return Complete string, never null
      */
     public static String getCompleteString(List<Text> texts) {
-        return texts.stream().map(Text::getValue).reduce(String::concat).orElse("");
+        return texts.stream()
+                .map(Text::getValue)
+                .filter(Objects::nonNull) // can be null if we set it to null during replace
+                .reduce(String::concat)
+                .orElse("");
     }
 
     /**
