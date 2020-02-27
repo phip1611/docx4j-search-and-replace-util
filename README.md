@@ -28,7 +28,7 @@ Place holders can be any string pattern, it doesn't have to be `${}`.
     WordprocessingMLPackage template = WordprocessingMLPackage.load(new FileInputStream(new File("document.docx")));;
     
     // that's it; you can now save `template`, export it as PDF or whatever you want to do
-    searchAndReplace(template, Map.of(
+    Docx4JSRUtil.searchAndReplace(template, Map.of(
             "${NAME}", "Philipp",
             "${SURNAME}", "Schuster",
             "${PLACE_OF_BIRTH}", "GERMANY"
