@@ -12,16 +12,7 @@ This means we can't just do a simple replace on a `Text`-object (a Docx4J-Type).
 
 Docx4JSRUtil solves this problem.
 
-##### How it works internally
-1. It retrieves the list of all `Text`-objects (in correct order) from Docx4J
-2. creates a "complete string" (`Text`-list reduced to a single string via concatenation)
-3. build lookup information to get from index in complete string to corresponding text object
-4. do search for placeholders in "complete string"
-5. build a `List<ReplaceCommand>` that is ordered from the last index in the "complete string" 
-   to the first (that's important to not invalidate indices of other `ReplaceCommand`s during replacement!)
-6. figure out on which `Text`-objects changes has to be done and do the actual replacement   
-
-Place holders can be any string pattern, it doesn't have to be `${}`.
+![alt text](demo_word_screenshot.png "Example: above: original word document; below: after replacement")
 
 **PS:** This is not yet in maven central. (TODO)
 
@@ -35,3 +26,14 @@ Place holders can be any string pattern, it doesn't have to be `${}`.
             "${SURNAME}", "Schuster",
             "${PLACE_OF_BIRTH}", "GERMANY"
     ));
+
+##### How it works internally
+1. It retrieves the list of all `Text`-objects (in correct order) from Docx4J
+2. creates a "complete string" (`Text`-list reduced to a single string via concatenation)
+3. build lookup information to get from index in complete string to corresponding text object
+4. do search for placeholders in "complete string"
+5. build a `List<ReplaceCommand>` that is ordered from the last index in the "complete string" 
+   to the first (that's important to not invalidate indices of other `ReplaceCommand`s during replacement!)
+6. figure out on which `Text`-objects changes has to be done and do the actual replacement   
+
+Place holders can be any string pattern, it doesn't have to be `${}`.
