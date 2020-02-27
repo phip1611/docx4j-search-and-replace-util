@@ -118,6 +118,8 @@ public class Docx4JSRUtilTest {
         placeholderMap.put("${PLACE_OF_BIRTH}", "GERMANY");
 
         try {
+            // this max take 4 seconds but this happens only once (internal heatup of data structures)
+            // https://stackoverflow.com/questions/18975049/how-to-decrease-docx4j-load-time
             WordprocessingMLPackage sourceDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/source.docx"));
             WordprocessingMLPackage expectedDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/expected_after.docx"));
 
