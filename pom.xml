@@ -4,10 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.phip1611.docx4j-search-and-replace-util</groupId>
+    <groupId>de.phip1611</groupId>
     <artifactId>docx4j-search-and-replace-util</artifactId>
     <version>1.0.0</version>
     <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.</description>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://raw.githubusercontent.com/phip1611/docx4j-search-and-replace-util/master/LICENSE</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>phip1611</name>
+            <email>phip1611@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
+    </scm>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
