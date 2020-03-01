@@ -23,8 +23,8 @@ import org.docx4j.wml.Text;
 public class Docx4JSRUtil {
 
     /**
-     * Searches for all occurrences of the placeholders and replaces all of them. The challenge is
-     * that placeholders can be split across multiple Text-objects.
+     * Searches for all occurrences of the placeholders in the parsed docx-document and replaces all of them
+     * inside the {@link WordprocessingMLPackage}-object.
      *
      * @param docxDocument Docx4J-parsed document
      * @param replaceMap Map with all placeholders and their new values.
@@ -291,7 +291,7 @@ public class Docx4JSRUtil {
     }
 
     /**
-     * Holds all information necessary to to a single replacement.
+     * Holds all information necessary to do a single replacement.
      */
     public static class ReplaceCommand implements Comparable<ReplaceCommand> {
 
@@ -325,7 +325,7 @@ public class Docx4JSRUtil {
         }
 
         /**
-         * Compares two replacement commands in a way that they are orderes from the end
+         * Compares two replacement commands in a way that they are ordered from the end
          * of the complete string to the beginning. This way replacements can happen without
          * invalidating indices of other commands.
          */
