@@ -133,7 +133,7 @@ public class Docx4JSRUtilTest {
 
             Assert.assertEquals(expected, after);
         } catch (Docx4JException e) {
-            Assert.fail("Exception occured!");
+            Assert.fail("Exception occurred!");
         }
     }
 
