@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBElement;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.ContentAccessor;
 import org.docx4j.wml.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Utility class to search and replace text in Docx4J-parsed documents.
@@ -21,6 +23,8 @@ import org.docx4j.wml.Text;
  * @author Philipp Schuster (phip1611@gmail.com)
  */
 public class Docx4JSRUtil {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Docx4JSRUtil.class);
 
     /**
      * Searches for all occurrences of the placeholders in the parsed docx-document and replaces all of them
@@ -212,8 +216,16 @@ public class Docx4JSRUtil {
             int beginIndex = tmi1.getPositionInsideTextObject(replaceCommand.getFoundResult().getStart());
             int endIndex = tmi2.getPositionInsideTextObject(replaceCommand.getFoundResult().getEnd());
 
+            String newValue;
+            if (replaceCommand.getNewValue() == null) {
+                LOGGER.warn("replaceCommand.getNewValue() is null! Using '' instead!");
+                newValue = "";
+            } else {
+                newValue = replaceCommand.getNewValue();
+            }
+
             t1 = t1.substring(0, beginIndex); // keep this, throw away part of place-holder
-            t1 = t1.concat(replaceCommand.getNewValue()); // concat new value
+            t1 = t1.concat(newValue); // concat new value
             t2 = t2.substring(endIndex + 1); // keep this, throw away part of place-holder
 
             // Update Text-objects
