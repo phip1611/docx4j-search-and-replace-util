@@ -4,11 +4,9 @@
 
     <groupId>de.phip1611</groupId>
     <artifactId>docx4j-search-and-replace-util</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>Docx4J Search and Replace Util</name>
-    <description>
-        Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.
-    </description>
+    <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.</description>
     <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
 
     <licenses>
@@ -31,7 +29,7 @@
         <developerConnection>scm:git:https://github.com/phip1611/docx4j-search-and-replace-util.git
         </developerConnection>
         <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
-        <tag>docx4j-search-and-replace-util-1.0.1</tag>
+        <tag>HEAD</tag>
   </scm>
 
     <properties>
@@ -156,6 +154,8 @@
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <!-- comes from $HOME/.me/settings.xml -->
+                    <!-- seems to me like this doesn't work because during
+                         'mvn release:perform' gpg asks for the passphrase anyway -->
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
                 <dependencies>

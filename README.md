@@ -20,6 +20,15 @@ This means we can't just do a simple replace on a `Text`-object (a Docx4J-Type).
 **PS:** This is not yet in maven central. (TODO)
 
 ### Usage:
+
+##### pom.xml / Maven
+    <dependency>
+        <groupId>de.phip1611</groupId>
+        <artifactId>docx4j-search-and-replace-util</artifactId>
+        <version>%latest version%</version>
+    </dependency>
+    
+##### Code
            
     WordprocessingMLPackage template = WordprocessingMLPackage.load(new FileInputStream(new File("document.docx")));;
     
