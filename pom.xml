@@ -6,8 +6,9 @@
 
     <groupId>de.phip1611</groupId>
     <artifactId>docx4j-search-and-replace-util</artifactId>
-    <version>1.0.1</version>
-    <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.
+    <version>1.0.1-SNAPSHOT</version>
+    <description>
+        Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.
     </description>
     <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
 
@@ -162,23 +163,46 @@
                         <artifactId>maven-scm-provider-gitexe</artifactId>
                         <version>1.11.2</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-api</artifactId>
+                        <version>1.11.2</version>
+                    </dependency>
                 </dependencies>
             </plugin>
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin> -->
         </plugins>
     </build>
+
+    <profiles>
+        <!-- GPG Signature on release -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 
 </project>
