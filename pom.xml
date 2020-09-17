@@ -156,6 +156,8 @@
                     <pushChanges>false</pushChanges>
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <!-- comes from $HOME/.me/settings.xml -->
+                    <!-- seems to me like this doesn't work because during
+                         'mvn release:perform' gpg asks for the passphrase anyway -->
                     <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
                 </configuration>
                 <dependencies>
