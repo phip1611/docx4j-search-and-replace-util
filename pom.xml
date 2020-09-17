@@ -6,9 +6,7 @@
     <artifactId>docx4j-search-and-replace-util</artifactId>
     <version>1.0.2-SNAPSHOT</version>
     <name>Docx4J Search and Replace Util</name>
-    <description>
-        Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.
-    </description>
+    <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.</description>
     <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
 
     <licenses>
