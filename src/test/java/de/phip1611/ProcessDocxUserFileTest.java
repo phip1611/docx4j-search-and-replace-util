@@ -67,8 +67,8 @@ public class ProcessDocxUserFileTest {
 
             sourceDocxDoc.save(new File(DEST_DOCX_PATH));
         } catch (Docx4JException e) {
-            Assert.fail("Exception occurred!");
             e.printStackTrace();
+            Assert.fail("Exception occurred!");
         }
     }
 
