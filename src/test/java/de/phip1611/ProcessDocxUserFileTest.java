@@ -44,8 +44,8 @@ import java.util.Map;
 public class ProcessDocxUserFileTest {
 
     private static final String SOURCE_DOCX_PATH = "src/test/resources/source.docx";
-    //private static final String DEST_DOCX_PATH = "/Users/phip1611/Desktop/test-processed.docx";
-    private static final String DEST_DOCX_PATH = "C:/Users/plsh/Desktop/test-processed.docx";
+    private static final String DEST_DOCX_PATH = "/Users/<replace user>/Desktop/test-processed.docx";
+    // private static final String DEST_DOCX_PATH = "C:/Users/<replace user>/Desktop/test-processed.docx";
 
     @Test
     // Unignore to execute and test this;
@@ -54,7 +54,7 @@ public class ProcessDocxUserFileTest {
     public void processDocxTest() {
         Map<String, String> placeholderMap = new HashMap<>();
         // Line breaks works as well
-        placeholderMap.put("${NAME}", "Phi\nlipp");
+        placeholderMap.put("${NAME}", "Philipp");
         placeholderMap.put("${SURNAME}", "Schuster");
         placeholderMap.put("${PLACE_OF_BIRTH}", "GERMANY");
 
