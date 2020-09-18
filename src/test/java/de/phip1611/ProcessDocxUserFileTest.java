@@ -34,14 +34,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This is not a test JUnit should execute but a test for
+ * Processes a user specified docx file and writes the
+ * transformed document into the specified location.
+ *
+ * This IS NOT a test JUnit should execute but a test for
  * humans (to execute from your IDE). This way you can
  * easily specify a path and check the processed .docx.
  */
-public class ProcessDocxTest {
+public class ProcessDocxUserFileTest {
 
     private static final String SOURCE_DOCX_PATH = "src/test/resources/source.docx";
-    private static final String DEST_DOCX_PATH = "/Users/phip1611/Desktop/test-processed.docx";
+    //private static final String DEST_DOCX_PATH = "/Users/phip1611/Desktop/test-processed.docx";
+    private static final String DEST_DOCX_PATH = "C:/Users/plsh/Desktop/test-processed.docx";
 
     @Test
     // Unignore to execute and test this;
@@ -64,6 +68,7 @@ public class ProcessDocxTest {
             sourceDocxDoc.save(new File(DEST_DOCX_PATH));
         } catch (Docx4JException e) {
             Assert.fail("Exception occurred!");
+            e.printStackTrace();
         }
     }
 
