@@ -39,6 +39,12 @@ This means we can't just do a simple replace on a `Text`-object (a Docx4J-Type).
             "${PLACE_OF_BIRTH}", "GERMANY"
     ));
 
+### Requirements
+
+**Docx4JSRUtil** (1.0.2) uses Java 8 as minimum version and should work with all
+higher Java versions as well. It uses `docx4j-JAXB-ReferenceImpl` instead of `MOXy`.
+There are no technical reasons for this limitation.
+
 ### How it works internally
 
 1. It retrieves the list of all `Text`-objects (in correct order) from Docx4J
