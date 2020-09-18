@@ -70,12 +70,12 @@ public class StringFindUtil {
         /**
          * Index inside source string where occurrence starts.
          */
-        private int start;
+        private final int start;
 
         /**
          * Index inside source string where occurrence ends.
          */
-        private int end;
+        private final int end;
 
         /**
          * Constructor.
