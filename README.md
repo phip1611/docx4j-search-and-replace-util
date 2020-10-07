@@ -16,9 +16,6 @@ This means we can't just do a simple replace on a `Text`-object (a Docx4J-Type).
 
 **Docx4JSRUtil** solves this problem.
 
-
-**PS:** This is not yet in maven central. (TODO)
-
 ### Usage:
 
 ##### pom.xml / Maven
