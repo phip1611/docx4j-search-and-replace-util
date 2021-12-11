@@ -1,3 +1,6 @@
+# 1.0.4
+Fix critical log4j vulnerability + minor dep upgrades.
+
 # 1.0.2
 Dependency upgrades + small fixes + definitely works with Java 8.
 Using `docx4j-JAXB-ReferenceImpl` @ `8.x`
