@@ -1,3 +1,7 @@
+# 1.0.5
+Removed log4j. Not necessary. Thanks for the [PR](https://github.com/phip1611/docx4j-search-and-replace-util/pull/8)!
+Release is on Maven Central but 1.0.4 not because some unknown error happened during release.
+
 # 1.0.4
 Fix critical log4j vulnerability + minor dep upgrades.
 

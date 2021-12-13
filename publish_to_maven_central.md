@@ -5,14 +5,11 @@ Release to maven consists of two steps:
 1) artifact is pushed to https://oss.sonatype.org/#nexus-search;quick~phip1611
 2) they push it further to maven central
 
-Only snapshot versions can be released!
+Current POM must contain a snapshot versions for a release!
 https://stackoverflow.com/questions/20054185/you-dont-have-a-snapshot-project-in-the-reactor-projects-list-when-using-jen
--> replacement is automatically done during "mvn release:prepare"
+-> replacement to next release-version is automatically done during "mvn release:prepare"
 
-Maven doesn't care about branches. Release can be done from "dev" branch.
-I think this is also the way to go because the version has to be "x.y.z-SNAPSHOT".
-After the release the branch can be merged into master.... or merge to master
-first and release then.
+Maven doesn't care about branches. Release can be done from "any" branch.
 
 
 ---
@@ -34,7 +31,7 @@ first and release then.
        </servers>
    </settings>
    ```
-3) (ONCE; COPY KEY TO OTHER MACHINES AND ADD IT TO GPG) I created a gpg key on my Mac (don't forget to backup it!) (public ID):
+3) (ONCE; COPY KEY TO OTHER MACHINES AND ADD IT TO GPG) I created a gpg key on my Mac (don't forget to bac it up!) public ID:
    ```
    pub   rsa3072 2020-09-17 [SC]
                                  389BB8340DA168D0
