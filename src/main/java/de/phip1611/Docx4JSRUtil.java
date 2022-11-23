@@ -225,7 +225,7 @@ public class Docx4JSRUtil {
                 int upperBorder = tmi2.getPosition();
                 int lowerBorder = tmi1.getPosition() + 1;
                 for (int i = lowerBorder; i < upperBorder; i++) {
-                    texts.get(i).setValue(null);
+                    texts.get(i).setValue("");
                 }
             }
 

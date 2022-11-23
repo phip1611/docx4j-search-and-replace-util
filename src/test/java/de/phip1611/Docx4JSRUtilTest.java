@@ -159,6 +159,35 @@ public class Docx4JSRUtilTest {
             Assert.fail("Exception occurred!");
         }
     }
+	
+    @Test
+    public void testSuccessiveSearchAndReplaceDocx() {
+        Map<String, String> placeholderMap = new HashMap<>();
+        placeholderMap.put("${NAME}", "Philipp");
+        placeholderMap.put("${SURNAME}", "Schuster");
+        Map<String, String> placeholderMap2 = new HashMap<>();
+        placeholderMap.put("${PLACE_OF_BIRTH}", "GERMANY");
+
+        try {
+            // this max take 4 seconds but this happens only once (internal heatup of data structures)
+            // https://stackoverflow.com/questions/18975049/how-to-decrease-docx4j-load-time
+            WordprocessingMLPackage sourceDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/source.docx"));
+            WordprocessingMLPackage expectedDocxDoc = WordprocessingMLPackage.load(new File("src/test/resources/expected_after.docx"));
+
+            Docx4JSRUtil.searchAndReplace(sourceDocxDoc, placeholderMap);
+            Docx4JSRUtil.searchAndReplace(sourceDocxDoc, placeholderMap2);
+
+            List<Text> afterList = Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(), Text.class);
+            List<Text> expectedList = Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(), Text.class);
+
+            String after = Docx4JSRUtil.getCompleteString(afterList);
+            String expected = Docx4JSRUtil.getCompleteString(expectedList);
+
+            Assert.assertEquals(expected, after);
+        } catch (Docx4JException e) {
+            Assert.fail("Exception occurred!");
+        }
+    }	
 
     private List<Text> asTexts(String... texts) {
         return Arrays.stream(texts).map(this::asText).collect(toList());
