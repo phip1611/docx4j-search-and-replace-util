@@ -44,13 +44,13 @@ import java.util.Map;
 public class ProcessDocxUserFileTest {
 
     private static final String SOURCE_DOCX_PATH = "src/test/resources/source.docx";
-    private static final String DEST_DOCX_PATH = "/Users/<replace user>/Desktop/test-processed.docx";
+    private static final String DEST_DOCX_PATH = "target/test-processed.docx";
     // private static final String DEST_DOCX_PATH = "C:/Users/<replace user>/Desktop/test-processed.docx";
 
     @Test
     // Unignore to execute and test this;
     // but don't check this into git without ignore!
-    @Ignore
+    //@Ignore
     public void processDocxTest() {
         Map<String, String> placeholderMap = new HashMap<>();
         // Line breaks works as well
