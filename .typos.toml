@@ -1,0 +1,13 @@
+# Configuration for https://github.com/crate-ci/typos
+
+[files]
+
+[default]
+extend-ignore-identifiers-re = [
+    # Markdown in README.md
+    "earchAnd*",
+]
+
+[default.extend-words]
+
+[default.extend-identifiers]
