@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: crate-ci/typos@v1.16.19
+      - uses: crate-ci/typos@v1.16.22
   nix-shell:
     name: nix-shell works
     runs-on: ubuntu-latest
