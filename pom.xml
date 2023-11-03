@@ -62,29 +62,7 @@
             <groupId>org.docx4j</groupId>
             <artifactId>docx4j-JAXB-ReferenceImpl</artifactId>
             <version>11.4.9</version>
-            <exclusions>
-            	<exclusion>
-            		<groupId>jakarta.xml.bind</groupId>
-            		<artifactId>jakarta.xml.bind-api</artifactId>
-            	</exclusion>
-            	<exclusion>
-            		<groupId>org.glassfish.jaxb</groupId>
-            		<artifactId>jaxb-runtime</artifactId>
-            	</exclusion>
-            </exclusions>
         </dependency>
-        
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>4.0.1</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.glassfish.jaxb</groupId>
-		    <artifactId>jaxb-runtime</artifactId>
-		    <version>4.0.4</version>
-		</dependency>
 		
         <dependency>
             <groupId>junit</groupId>
