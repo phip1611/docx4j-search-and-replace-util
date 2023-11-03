@@ -155,3 +155,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/linux,macos,maven,windows,intellij,visualstudiocode
+/.classpath
+/.project
+/.settings
