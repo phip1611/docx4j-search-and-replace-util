@@ -1,3 +1,8 @@
+# 2.0.0 (2023-11-03)
+- **BREAKING** This library is now based on Java 11 instead of Java 8
+- It now references docx4j-dependencies in version 11 instead of version 8
+- internal improvements (other dependency updates)
+
 # 1.0.7 (2023-01-22)
 - bug fix that produces NPEs (<https://github.com/phip1611/docx4j-search-and-replace-util/pull/11>)
 - bumped `docx4j-JAXB-ReferenceImpl` from `8.3.2` to `8.3.9`
