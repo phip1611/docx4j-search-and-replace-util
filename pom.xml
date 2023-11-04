@@ -4,7 +4,7 @@
 
     <groupId>de.phip1611</groupId>
     <artifactId>docx4j-search-and-replace-util</artifactId>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
     <name>Docx4J Search and Replace Util</name>
     <description>Docx4JSRUtil library helps you to search and replace text inside docx-Documents parsed by Docx4J.</description>
     <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
@@ -29,7 +29,7 @@
         <developerConnection>scm:git:https://github.com/phip1611/docx4j-search-and-replace-util.git
         </developerConnection>
         <url>https://github.com/phip1611/docx4j-search-and-replace-util</url>
-        <tag>main</tag>
+        <tag>docx4j-search-and-replace-util-2.0.0</tag>
     </scm>
 
     <properties>
