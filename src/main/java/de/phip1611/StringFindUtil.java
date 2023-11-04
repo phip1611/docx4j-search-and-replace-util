@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility-class to find strings in strings.
+ * Namespace class (static class) with static-only methods to find strings in
+ * strings.
  *
  * @author Philipp Schuster (phip1611@gmail.com)
  */
@@ -81,7 +82,6 @@ public class StringFindUtil {
 
     /**
      * Constructor.
-     * .
      *
      * @param start        Index inside source string where occurrence starts.
      * @param searchString Source string

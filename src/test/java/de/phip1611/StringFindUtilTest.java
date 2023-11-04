@@ -24,17 +24,19 @@
 
 package de.phip1611;
 
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
-
+/**
+ * .
+ */
 public class StringFindUtilTest {
 
   @Test
   public void testFindAllOccurrencesInStringSimple() {
     List<StringFindUtil.FoundResult> foo =
-      StringFindUtil.findAllOccurrencesInString("${FOO}", "${FOO}");
+        StringFindUtil.findAllOccurrencesInString("${FOO}", "${FOO}");
 
     Assert.assertEquals(1, foo.size());
     Assert.assertEquals(0, foo.get(0).getStart());
@@ -45,9 +47,9 @@ public class StringFindUtilTest {
   public void testFindAllOccurrencesInStringComplex() {
     String string = "Hallo ${FOO} abc ${FOO} cbca ${BAR} afaf";
     List<StringFindUtil.FoundResult> foo =
-      StringFindUtil.findAllOccurrencesInString(string, "${FOO}");
+        StringFindUtil.findAllOccurrencesInString(string, "${FOO}");
     List<StringFindUtil.FoundResult> bar =
-      StringFindUtil.findAllOccurrencesInString(string, "${BAR}");
+        StringFindUtil.findAllOccurrencesInString(string, "${BAR}");
 
     Assert.assertEquals(2, foo.size());
     Assert.assertEquals(6, foo.get(0).getStart());

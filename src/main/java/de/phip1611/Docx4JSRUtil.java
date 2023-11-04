@@ -24,11 +24,8 @@
 
 package de.phip1611;
 
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.wml.ContentAccessor;
-import org.docx4j.wml.Text;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static de.phip1611.StringFindUtil.findAllOccurrencesInString;
+import static java.util.stream.Collectors.toList;
 
 import jakarta.xml.bind.JAXBElement;
 import java.util.ArrayList;
@@ -36,23 +33,27 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import static de.phip1611.StringFindUtil.findAllOccurrencesInString;
-import static java.util.stream.Collectors.toList;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.wml.ContentAccessor;
+import org.docx4j.wml.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * Utility class to search and replace text in Docx4J-parsed documents.
+ * Namespace class (static class) with static-only methods to search and
+ * replace text in documents parsed with Docx4J.
  *
  * @author Philipp Schuster (phip1611@gmail.com)
  */
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class Docx4JSRUtil {
 
   private static final Logger LOGGER =
-    LoggerFactory.getLogger(Docx4JSRUtil.class);
+      LoggerFactory.getLogger(Docx4JSRUtil.class);
 
   /**
-   * Searches for all occurrences of the placeholders in the parsed docx-document and replaces all of them
-   * inside the {@link WordprocessingMLPackage}-object.
+   * Searches for all occurrences of the placeholders in the parsed docx-document
+   * and replaces all of them inside the {@link WordprocessingMLPackage}-object.
    *
    * @param docxDocument Docx4J-parsed document
    * @param replaceMap   Map with all placeholders and their new values.
@@ -62,7 +63,7 @@ public class Docx4JSRUtil {
                                       Map<String, String> replaceMap) {
     // All Text-objects in correct order
     List<Text> texts =
-      getAllElementsOfType(docxDocument.getMainDocumentPart(), Text.class);
+        getAllElementsOfType(docxDocument.getMainDocumentPart(), Text.class);
     String completeString = getCompleteString(texts);
     if (completeString.isEmpty()) {
       return;
@@ -70,19 +71,20 @@ public class Docx4JSRUtil {
 
     List<TextMetaItem> metaItemList = buildMetaItemList(texts);
 
-    // with this array we can lookup for each index in completeString what is the corresponding
-    // TextMetaItem
+    // with this array we can lookup for each index in completeString what is
+    // the corresponding TextMetaItem
     TextMetaItem[] stringIndicesLookupArray =
       buildIndexToTextMetaItemArray(metaItemList);
 
-    // build a list of all replace commands that is ordered from the last one to the first
-    // this is important so that replacements won't invalidate indices of other ReplaceCommands
+    // build a list of all replace commands that is ordered from the last one to
+    // the first this is important so that replacements won't invalidate indices
+    // of other ReplaceCommands
     List<ReplaceCommand> replaceCommandList =
-      buildAllReplaceCommands(completeString, replaceMap);
+        buildAllReplaceCommands(completeString, replaceMap);
 
     // execute all (in correct order)
     replaceCommandList.forEach(
-      rc -> executeReplaceCommand(texts, rc, stringIndicesLookupArray));
+        rc -> executeReplaceCommand(texts, rc, stringIndicesLookupArray));
   }
 
   /**
@@ -113,7 +115,8 @@ public class Docx4JSRUtil {
   }
 
   /**
-   * Returns the full string back. This string can be understood as the full information that is inside a docx-document.
+   * Returns the full string back. This string can be understood as the full
+   * information that is inside a docx-document.
    *
    * @param texts all Text-objects
    * @return Complete string, never null
@@ -147,14 +150,15 @@ public class Docx4JSRUtil {
   }
 
   /**
-   * Builds an array with the length of the complete string of TextMetaItem. This way we can lookup for every
-   * index in the complete string what's the responsible Text-objects is.
+   * Builds an array with the length of the complete string of TextMetaItem.
+   * This way we can look up for every index in the complete string what's the
+   * responsible Text-objects is.
    *
    * @param metaItemList list with all {@link TextMetaItem}s
    * @return array with the length of the complete string of TextMetaItem
    */
   public static TextMetaItem[] buildIndexToTextMetaItemArray(
-    List<TextMetaItem> metaItemList) {
+      List<TextMetaItem> metaItemList) {
     int currentStringIndicesToTextIndex = 0;
     // + 1, because inside the loop we use "<" instead of "<="; max is inclusive
     int max = metaItemList.get(metaItemList.size() - 1).getEnd() + 1;
@@ -163,7 +167,7 @@ public class Docx4JSRUtil {
 
     for (int i = 0; i < max; i++) {
       TextMetaItem currentTextMetaItem =
-        metaItemList.get(currentStringIndicesToTextIndex);
+          metaItemList.get(currentStringIndicesToTextIndex);
       arr[i] = currentTextMetaItem;
       if (i >= currentTextMetaItem.getEnd()) {
         currentStringIndicesToTextIndex++;
@@ -173,14 +177,14 @@ public class Docx4JSRUtil {
   }
 
   /**
-   * Builds a list of {@link ReplaceCommand} for a single search and replace entry.
-   * It's a list because a search-value can have multiple occurrences.
+   * Builds a list of {@link ReplaceCommand} for a single search and replace
+   * entry. It's a list because a search-value can have multiple occurrences.
    *
    * @param completeString        complete string
    * @param searchAndReplaceEntry Entry with search value and replace value
    */
   private static List<ReplaceCommand> buildReplaceCommandsForOnePlaceholder(
-    String completeString, Map.Entry<String, String> searchAndReplaceEntry) {
+      String completeString, Map.Entry<String, String> searchAndReplaceEntry) {
     return findAllOccurrencesInString(completeString,
       searchAndReplaceEntry.getKey()).stream()
       .map(fmi -> new ReplaceCommand(searchAndReplaceEntry.getValue(), fmi))
@@ -188,33 +192,37 @@ public class Docx4JSRUtil {
   }
 
   /**
-   * Builds the list of all {@link ReplaceCommand} for all placeholders and the new values.
+   * Builds the list of all {@link ReplaceCommand} for all placeholders and the
+   * new values.
    *
    * @param completeString complete string
    * @param replaceMap     Map with search and replace values
    * @return all {@link ReplaceCommand} for all placeholders and the new values
    */
   public static List<ReplaceCommand> buildAllReplaceCommands(
-    String completeString, Map<String, String> replaceMap) {
+      String completeString, Map<String, String> replaceMap) {
     return replaceMap.entrySet().stream()
       .map(e -> buildReplaceCommandsForOnePlaceholder(completeString, e))
       .flatMap(Collection::stream)
-      // important to sort!!!!!
-      // we sort from the end to the beginning so that replacements won't invalidate indices of other
-      // commands
+      // Important to sort!!!!!
+      // We sort from the end to the beginning so that replacements won't
+      // invalidate indices of following commands.
       .sorted()
       .collect(toList());
   }
 
   /**
-   * Executes a single {@link ReplaceCommand}. It's important that all replace commands are executed in the right order.
-   * The right order means from the last to the first one so that indices of other commands won't get invalidated
-   * by replacements.
+   * Executes a single {@link ReplaceCommand}. It's important that all replace
+   * commands are executed in the right order. The right order means from the
+   * last to the first one so that indices of other commands won't get
+   * invalidated by replacements.
    *
    * @param texts          all Text-objects
    * @param replaceCommand {@link ReplaceCommand} to execute
-   * @param arr            Lookup-Array from index in complete string to TextMetaItem
+   * @param arr            Lookup-Array from index in complete string to
+   *                       TextMetaItem
    */
+  @SuppressWarnings("checkstyle:VariableDeclarationUsageDistance")
   public static void executeReplaceCommand(List<Text> texts,
                                            ReplaceCommand replaceCommand,
                                            TextMetaItem[] arr) {
@@ -226,16 +234,18 @@ public class Docx4JSRUtil {
 
       String t1 = tmi1.getText().getValue();
       int beginIndex = tmi1.getPositionInsideTextObject(
-        replaceCommand.getFoundResult().getStart());
+          replaceCommand.getFoundResult().getStart()
+      );
       int endIndex = tmi2.getPositionInsideTextObject(
-        replaceCommand.getFoundResult().getEnd());
+          replaceCommand.getFoundResult().getEnd()
+      );
 
       String keepBefore = t1.substring(0, beginIndex);
       String keepAfter = t1.substring(endIndex + 1);
 
       // Update Text-object
       tmi1.getText()
-        .setValue(keepBefore + replaceCommand.getNewValue() + keepAfter);
+          .setValue(keepBefore + replaceCommand.getNewValue() + keepAfter);
     } else {
       // null all Text-objects that may be in between
 
@@ -254,9 +264,9 @@ public class Docx4JSRUtil {
 
       // indices inside Text-objects (relative to their start)
       int beginIndex = tmi1.getPositionInsideTextObject(
-        replaceCommand.getFoundResult().getStart());
+          replaceCommand.getFoundResult().getStart());
       int endIndex = tmi2.getPositionInsideTextObject(
-        replaceCommand.getFoundResult().getEnd());
+          replaceCommand.getFoundResult().getEnd());
 
       String newValue;
       if (replaceCommand.getNewValue() == null) {
@@ -286,22 +296,22 @@ public class Docx4JSRUtil {
     /**
      * Position/index of the Text-object inside the list of all Text-objects.
      */
-    private int position;
+    private final int position;
 
     /**
      * Index in complete string where the Text-object starts.
      */
-    private int start;
+    private final int start;
 
     /**
      * Index in complete string where the Text-object ends.
      */
-    private int end;
+    private final int end;
 
     /**
      * The Text-object.
      */
-    private Text text;
+    private final Text text;
 
     /**
      * Constructor.
@@ -335,11 +345,13 @@ public class Docx4JSRUtil {
     }
 
     /**
-     * Utility-method to find out what's the relative index inside the Text-object of an
-     * index in the complete string.
+     * Utility-method to find out what's the relative index inside the Text-\
+     * object of an index in the complete string.
      *
-     * @param completeStringIndex Index inside complete string where this Text-object is a part of
-     * @return relative index inside the Text-object of an index in the complete string.
+     * @param completeStringIndex Index inside complete string where this Text-\
+     *                            object is a part of
+     * @return relative index inside the Text-object of an index in the complete
+     *         string.
      */
     public int getPositionInsideTextObject(int completeStringIndex) {
       return completeStringIndex - this.start;
@@ -354,12 +366,12 @@ public class Docx4JSRUtil {
     /**
      * The new value for the placeholder.
      */
-    private String newValue;
+    private final String newValue;
 
     /**
      * Information where the replacement takes place.
      */
-    private StringFindUtil.FoundResult foundMetaItem;
+    private final StringFindUtil.FoundResult foundMetaItem;
 
     /**
      * Constructor.
@@ -388,9 +400,9 @@ public class Docx4JSRUtil {
      */
     @Override
     public int compareTo(ReplaceCommand other) {
-      // Sortieren von hinten nach vorne
-      return other.getFoundResult().getStart() -
-        this.getFoundResult().getStart();
+      // Sort from last to first
+      return other.getFoundResult().getStart()
+        - this.getFoundResult().getStart();
     }
   }
 

@@ -32,13 +32,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.wml.Text;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * .
+ */
+@SuppressWarnings("checkstyle:AbbreviationAsWordInName")
 public class Docx4JSRUtilTest {
 
   @Test
@@ -46,7 +49,7 @@ public class Docx4JSRUtilTest {
     List<Text> texts = asTexts("Hallo ${", "FOO", "} Bar");
 
     List<Docx4JSRUtil.TextMetaItem> list =
-      Docx4JSRUtil.buildMetaItemList(texts);
+        Docx4JSRUtil.buildMetaItemList(texts);
     Assert.assertEquals(texts.get(0), list.get(0).getText());
     Assert.assertEquals(0, list.get(0).getPosition());
     Assert.assertEquals(texts.get(1), list.get(1).getText());
@@ -82,9 +85,9 @@ public class Docx4JSRUtilTest {
     List<Text> texts = asTexts("Hallo ${", "FOO", "} Bar");
 
     List<Docx4JSRUtil.TextMetaItem> list =
-      Docx4JSRUtil.buildMetaItemList(texts);
+        Docx4JSRUtil.buildMetaItemList(texts);
     Docx4JSRUtil.TextMetaItem[] array =
-      Docx4JSRUtil.buildIndexToTextMetaItemArray(list);
+        Docx4JSRUtil.buildIndexToTextMetaItemArray(list);
 
     Assert.assertEquals(texts.get(0), array[0].getText());
     Assert.assertEquals(texts.get(0), array[3].getText());
@@ -106,10 +109,10 @@ public class Docx4JSRUtilTest {
     replaceLookupMap.put("${FOO}", "Neuer Wert");
 
     String completeString =
-      Docx4JSRUtil.getCompleteString(asTexts("Hallo ${", "FOO", "} Bar"));
+        Docx4JSRUtil.getCompleteString(asTexts("Hallo ${", "FOO", "} Bar"));
 
     List<Docx4JSRUtil.ReplaceCommand> replaceCommands =
-      Docx4JSRUtil.buildAllReplaceCommands(completeString, replaceLookupMap);
+        Docx4JSRUtil.buildAllReplaceCommands(completeString, replaceLookupMap);
     Assert.assertEquals(1, replaceCommands.size());
     Assert.assertEquals("Neuer Wert", replaceCommands.get(0).getNewValue());
   }
@@ -126,20 +129,20 @@ public class Docx4JSRUtilTest {
     String completeString = Docx4JSRUtil.getCompleteString(texts);
 
     List<Docx4JSRUtil.TextMetaItem> metaItemList =
-      Docx4JSRUtil.buildMetaItemList(texts);
+        Docx4JSRUtil.buildMetaItemList(texts);
     Docx4JSRUtil.TextMetaItem[] lookupArray =
       Docx4JSRUtil.buildIndexToTextMetaItemArray(metaItemList);
     List<Docx4JSRUtil.ReplaceCommand> replaceCommands =
-      Docx4JSRUtil.buildAllReplaceCommands(completeString, replaceLookupMap);
+        Docx4JSRUtil.buildAllReplaceCommands(completeString, replaceLookupMap);
 
     replaceCommands.forEach(
-      rc -> Docx4JSRUtil.executeReplaceCommand(texts, rc, lookupArray));
+        rc -> Docx4JSRUtil.executeReplaceCommand(texts, rc, lookupArray));
 
     String newCompleteString = texts.stream()
-      .map(Text::getValue)
-      .filter(Objects::nonNull)
-      .reduce(String::concat)
-      .get();
+        .map(Text::getValue)
+        .filter(Objects::nonNull)
+        .reduce(String::concat)
+        .orElse("");
 
     Assert.assertEquals("Hallo FOO BarBARBAR", newCompleteString);
   }
@@ -162,10 +165,10 @@ public class Docx4JSRUtilTest {
       Docx4JSRUtil.searchAndReplace(sourceDocxDoc, placeholderMap);
 
       List<Text> afterList =
-        Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(),
+          Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(),
           Text.class);
       List<Text> expectedList =
-        Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(),
+          Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(),
           Text.class);
 
       String after = Docx4JSRUtil.getCompleteString(afterList);
@@ -197,10 +200,10 @@ public class Docx4JSRUtilTest {
       Docx4JSRUtil.searchAndReplace(sourceDocxDoc, placeholderMap2);
 
       List<Text> afterList =
-        Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(),
+          Docx4JSRUtil.getAllElementsOfType(sourceDocxDoc.getMainDocumentPart(),
           Text.class);
       List<Text> expectedList =
-        Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(),
+          Docx4JSRUtil.getAllElementsOfType(expectedDocxDoc.getMainDocumentPart(),
           Text.class);
 
       String after = Docx4JSRUtil.getCompleteString(afterList);
