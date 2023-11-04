@@ -89,6 +89,32 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <!-- Options: https://maven.apache.org/plugins/maven-checkstyle-plugin/check-mojo.html-->
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <!-- Treat warnings as errors. -->
+                    <!-- Only do this for local development. -->
+                    <!-- <violationSeverity>warning</violationSeverity> -->
+                    <!--
+                    Not a file path but a pre-defined one:
+                    https://maven.apache.org/plugins/maven-checkstyle-plugin/examples/custom-checker-config.html
+                    -->
+                    <configLocation>google_checks.xml</configLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.6.0</version>
                 <executions>
@@ -165,7 +191,6 @@
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <!-- GPG Signature on release -->
         <profile>

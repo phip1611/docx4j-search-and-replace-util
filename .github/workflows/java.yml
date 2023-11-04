@@ -4,6 +4,21 @@ on:
   - pull_request
   - merge_group
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: adopt
+      - name: Checkstyle
+        run: mvn -B checkstyle:check --file pom.xml
+      - uses: actions/upload-artifact@v3
+        with:
+          name: checkstyle-result.xml
+          path: target/checkstyle-result.xml
   build_jdk11:
     runs-on: ubuntu-latest
     steps:
@@ -26,3 +41,18 @@ jobs:
           distribution: adopt
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+  doc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: adopt
+      - name: Javadoc
+        run: mvn -B javadoc:javadoc --file pom.xml
+      - uses: actions/upload-artifact@v3
+        with:
+          name: javadoc
+          path: target/site/apidocs
