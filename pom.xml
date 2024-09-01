@@ -90,7 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>3.5.0</version>
                 <configuration>
                     <!-- Options: https://maven.apache.org/plugins/maven-checkstyle-plugin/check-mojo.html-->
                     <consoleOutput>true</consoleOutput>
