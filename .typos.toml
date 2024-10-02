@@ -3,9 +3,11 @@
 [files]
 
 [default]
-extend-ignore-identifiers-re = [
+extend-ignore-re = [
     # Markdown in README.md
     "earchAnd*",
+    # release.sh
+    "-Prelease-sign-artifacts"
 ]
 
 [default.extend-words]
