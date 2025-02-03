@@ -19,7 +19,6 @@ jobs:
         with:
           # Only used for "nix-build", "nix-shell" etc.
           # Inside the files, I use pinned nixpkgs.
-          nix_path: nixpkgs=channel:nixos-23.05
-      - uses: DeterminateSystems/magic-nix-cache-action@main
+          nix_path: nixpkgs=channel:nixos-unstable
       - run: |
           nix-shell --pure --run "mvn -B dependency:tree"
