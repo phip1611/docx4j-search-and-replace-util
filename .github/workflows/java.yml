@@ -15,7 +15,7 @@ jobs:
           distribution: adopt
       - name: Checkstyle
         run: mvn -B checkstyle:check --file pom.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: checkstyle-result.xml
           path: target/checkstyle-result.xml
@@ -52,7 +52,7 @@ jobs:
           distribution: adopt
       - name: Javadoc
         run: mvn -B javadoc:javadoc --file pom.xml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: javadoc
           path: target/site/apidocs
