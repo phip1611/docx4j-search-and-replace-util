@@ -9,10 +9,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 11
-        uses: actions/setup-java@v5.6.0
+        uses: actions/setup-java@v6.0.0
         with:
           java-version: '11'
-          distribution: adopt
+          distribution: temurin
       - name: Checkstyle
         run: mvn -B checkstyle:check --file pom.xml
       - uses: actions/upload-artifact@v7
@@ -24,10 +24,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 11
-        uses: actions/setup-java@v5.6.0
+        uses: actions/setup-java@v6.0.0
         with:
           java-version: '11'
-          distribution: adopt
+          distribution: temurin
       - name: Build with Maven
         run: mvn -B package --file pom.xml
   build_latest_lts:
@@ -35,10 +35,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 21
-        uses: actions/setup-java@v5.6.0
+        uses: actions/setup-java@v6.0.0
         with:
           java-version: '21'
-          distribution: adopt
+          distribution: temurin
       - name: Build with Maven
         run: mvn -B package --file pom.xml
   doc:
@@ -46,10 +46,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 11
-        uses: actions/setup-java@v5.6.0
+        uses: actions/setup-java@v6.0.0
         with:
           java-version: '11'
-          distribution: adopt
+          distribution: temurin
       - name: Javadoc
         run: mvn -B javadoc:javadoc --file pom.xml
       - uses: actions/upload-artifact@v7
